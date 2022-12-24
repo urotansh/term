@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "users/sign_out", to: "public/sessions#destroy"
   end
+
+  #デバッグ用 GETメソッドサインアウト(admin)
+  devise_scope :admin do
+    get "admin/sign_out", to: "admin/sessions#destroy"
+  end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
