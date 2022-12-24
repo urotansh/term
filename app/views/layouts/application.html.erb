@@ -11,6 +11,9 @@
   </head>
 
   <body>
+    <%= render "layouts/header" %>
+    <p class="text-success"><%= notice %></p>
+    <p class="text-danger"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
