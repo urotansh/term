@@ -5,7 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :image
-  
+
+  validates :name,
+    uniqueness: true,
+    length: { minimum: 1, maximum: 20 },
+    format: { with: /\A[a-zA-Z0-9]+\z/ }
   
   # ゲストユーザ情報取得(存在しない場合、既定値で作成)
   def self.guest
