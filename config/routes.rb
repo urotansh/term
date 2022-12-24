@@ -18,6 +18,17 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get "about", to: "homes#about"
+    
+    # ユーザ機能
+    resources :users, param: :name, path: '/', only: [:show] do
+      collection do
+        get   "settings/profile", to: "users#edit"
+        patch "settings/profile", to: "users#update"
+        get   "quit",             to: "users#quit"
+        patch "withdraw",         to: "users#withdraw"
+      end
+    end
+    
   end
 
   namespace :admin do

@@ -1,0 +1,17 @@
+<h1>Public::Users#show</h1>
+<p>Find me in app/views/public/users/show.html.erb</p>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="shadow-lg p-1 shadow-lg rounded">
+        <%= image_tag @user.get_image(100, 100), class: "d-block mx-auto border" %>
+        <p class="text-center"><%= @user.name %></p>
+        <%= link_to(settings_profile_users_path, class: 'btn btn-outline-secondary btn-lg btn-block') do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
