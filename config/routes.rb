@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  #ゲストログイン用ルーティング
+  devise_scope :user do
+    post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
+  end
+
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -9,15 +14,6 @@ Rails.application.routes.draw do
     sessions: "public/sessions"
   }
   
-  #デバッグ用 GETメソッドサインアウト(users)
-  devise_scope :user do
-    get "users/sign_out", to: "public/sessions#destroy"
-  end
-
-  #デバッグ用 GETメソッドサインアウト(admin)
-  devise_scope :admin do
-    get "admin/sign_out", to: "admin/sessions#destroy"
-  end
   
   scope module: :public do
     root to: "homes#top"
