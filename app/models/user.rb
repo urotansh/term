@@ -13,6 +13,16 @@ class User < ApplicationRecord
       
   validates :name, user_name_reserved: true
   
+  # ensure user is active
+  def active_for_authentication?
+    super && !is_deleted
+  end
+
+  # provide a custom message for a deleted user
+  def inactive_message
+    !is_deleted ? super : :deleted_user
+  end
+  
   # ゲストユーザ情報取得(存在しない場合、既定値で作成)
   def self.guest
     find_or_create_by!(name: "guestuser", email: "guest@guest.com") do |user|
