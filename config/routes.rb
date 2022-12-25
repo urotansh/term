@@ -18,9 +18,13 @@ Rails.application.routes.draw do
   # 管理者機能
   namespace :admin do
     get "/", to: "homes#top"
+    
+    # ユーザー管理機能
+    resources :users, param: :name, only: [:index, :show, :edit, :update]
   end
   
   
+  # ユーザー機能
   scope module: :public do
     root to: "homes#top"
     get "about", to: "homes#about"
