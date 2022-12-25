@@ -15,6 +15,18 @@
       <div id="new">
         <%= link_to "New", new_note_path, class: "btn btn-primary", remote: true %>
       </div>
+      <ul>
+        <li>
+          Notes
+          <ul>
+            <% @notes.each do |note| %>
+              <li>
+                <%= note.title %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
     </div>
 
     <div class="offset-md-1 col-md-8">

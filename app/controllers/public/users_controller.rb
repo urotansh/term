@@ -1,6 +1,10 @@
 class Public::UsersController < ApplicationController
   def show
+    # ユーザー情報
     @user = current_user
+    
+    # ユーザー投稿情報
+    @notes = current_user.notes
   end
 
   def edit
