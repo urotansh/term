@@ -15,13 +15,27 @@ Rails.application.routes.draw do
   }
   
   
-  scope module: :public do
-    root to: "homes#top"
-    get "about", to: "homes#about"
-  end
-
+  # 管理者機能
   namespace :admin do
     get "/", to: "homes#top"
   end
+  
+  
+  scope module: :public do
+    root to: "homes#top"
+    get "about", to: "homes#about"
+    
+    # ユーザー設定機能
+    resources :users, param: :name, path: '/', only: [:show] do
+      collection do
+        get   "settings/profile", to: "users#edit"
+        patch "settings/profile", to: "users#update"
+        get   "quit",             to: "users#quit"
+        patch "withdraw",         to: "users#withdraw"
+      end
+    end
+    
+  end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
