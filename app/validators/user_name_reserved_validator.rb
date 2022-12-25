@@ -24,7 +24,7 @@ class UserNameReservedValidator < ActiveModel::EachValidator
     cart gift alpha beta tux year wiki private analytics public static
     img style script file flash swf dist xml svg cgi atom forgot server
     cgi-bin server-status balancer-manager icon ldap-status server-info svn 
-    quit withdraw
+    quit withdraw note
   }
 
   def validate_each(record, attribute, value)
