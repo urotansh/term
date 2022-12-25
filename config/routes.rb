@@ -15,11 +15,17 @@ Rails.application.routes.draw do
   }
   
   
+  # 管理者機能
+  namespace :admin do
+    get "/", to: "homes#top"
+  end
+  
+  
   scope module: :public do
     root to: "homes#top"
     get "about", to: "homes#about"
     
-    # ユーザ機能
+    # ユーザー設定機能
     resources :users, param: :name, path: '/', only: [:show] do
       collection do
         get   "settings/profile", to: "users#edit"
@@ -31,8 +37,5 @@ Rails.application.routes.draw do
     
   end
 
-  namespace :admin do
-    get "/", to: "homes#top"
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
