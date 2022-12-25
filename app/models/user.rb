@@ -10,6 +10,8 @@ class User < ApplicationRecord
     uniqueness: true,
     length: { minimum: 1, maximum: 20 },
     format: { with: /\A[a-zA-Z0-9]+\z/ }
+      
+  validates :name, user_name_reserved: true
   
   # ゲストユーザ情報取得(存在しない場合、既定値で作成)
   def self.guest
