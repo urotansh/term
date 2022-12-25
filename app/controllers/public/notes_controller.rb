@@ -2,6 +2,14 @@ class Public::NotesController < ApplicationController
   def new
     @note = Note.new
   end
+  
+  def create
+    @note = Note.new(note_params)
+    @note.user_id = current_user.id
+    # TODO:バリデーション
+    @note.save
+    redirect_to user_path(current_user.name), notice: "新規投稿が成功しました。"
+  end
 
   def index
   end
@@ -11,4 +19,11 @@ class Public::NotesController < ApplicationController
 
   def edit
   end
+  
+  private
+  
+  def note_params
+    params.require(:note).permit(:title, :content)
+  end
+   
 end
