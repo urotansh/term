@@ -30,7 +30,11 @@ Rails.application.routes.draw do
     get "about", to: "homes#about"
     
     # 投稿機能
-    resources :notes
+    resources :notes do
+      # コメント機能
+      resources :note_comments, only: [:create, :destroy]
+    
+    end
     
     # ユーザー設定機能
     resources :users, param: :name, path: '/', only: [:show] do
