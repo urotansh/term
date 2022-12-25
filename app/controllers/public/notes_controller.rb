@@ -12,6 +12,7 @@ class Public::NotesController < ApplicationController
   end
 
   def index
+    @notes = current_user.notes.page(params[:page])
   end
 
   def show

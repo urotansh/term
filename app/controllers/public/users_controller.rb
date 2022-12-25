@@ -5,6 +5,7 @@ class Public::UsersController < ApplicationController
     
     # ユーザー投稿情報
     @notes = current_user.notes
+    @notes_index = @notes.page(params[:page])
   end
 
   def edit

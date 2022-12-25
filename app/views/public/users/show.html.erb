@@ -12,12 +12,15 @@
           <%= link_to "ユーザー情報を編集する", settings_profile_users_path, class: "btn btn-outline-secondary btn-sm d-block mx-auto" %>
         <% end %>
       </div>
-      <div id="new">
+      <div id="new" class="d-inline-block">
         <%= link_to "New", new_note_path, class: "btn btn-primary", remote: true %>
+      </div>
+      <div id="index" class="d-inline-block">
+        <%= link_to "Index", notes_path, class: "btn btn-secondary", remote: true %>
       </div>
       <ul>
         <li>
-          Notes
+          <%= link_to "Notes", notes_path, remote: true %>
           <ul>
             <% @notes.each do |note| %>
               <li>
@@ -32,7 +35,11 @@
     <div class="offset-md-1 col-md-8">
       <div id="edit" class="d-inline-block"></div>
       <div id="destroy" class="d-inline-block"></div>
-      <div id="note"></div>
+      <div id="note">
+        <% if !@notes_index.nil? %>
+          <%= render "public/notes/notes", notes: @notes_index %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
