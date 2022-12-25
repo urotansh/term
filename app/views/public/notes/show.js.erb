@@ -1,1 +1,2 @@
 $("#note").html("<%= j(render 'note', note: @note) %>");
+$("#edit").html("<%= j(link_to 'Edit', edit_note_path(@note.id), class: "btn btn-success", remote: true, data: {"turbolinks" => false}) %>");

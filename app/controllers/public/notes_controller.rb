@@ -19,6 +19,7 @@ class Public::NotesController < ApplicationController
   end
 
   def edit
+    @note = current_user.notes.find(params[:id])
   end
   
   private
