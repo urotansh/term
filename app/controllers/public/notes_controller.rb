@@ -22,6 +22,13 @@ class Public::NotesController < ApplicationController
     @note = current_user.notes.find(params[:id])
   end
   
+  def update
+    @note = current_user.notes.find(params[:id])
+    # TODO:バリデーション
+    @note.update(note_params)
+    redirect_to user_path(current_user.name), notice: "投稿内容を更新しました。"
+  end
+  
   private
   
   def note_params
