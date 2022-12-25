@@ -4,6 +4,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(name: params[:name])
   end
 
   def show
