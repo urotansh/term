@@ -9,7 +9,35 @@
         <%= image_tag @user.get_image(100, 100), class: "d-block mx-auto border" %>
         <p class="text-center"><%= @user.name %></p>
         <% if @user == current_user %>
-          <%= link_to "ユーザー情報を編集する", settings_profile_users_path, class: 'btn btn-outline-secondary btn-sm d-block mx-auto' %>
+          <%= link_to "ユーザー情報を編集する", settings_profile_users_path, class: "btn btn-outline-secondary btn-sm d-block mx-auto" %>
+        <% end %>
+      </div>
+      <div id="new" class="d-inline-block">
+        <%= link_to "New", new_note_path, class: "btn btn-primary", remote: true %>
+      </div>
+      <div id="index" class="d-inline-block">
+        <%= link_to "Index", notes_path, class: "btn btn-secondary", remote: true %>
+      </div>
+      <ul>
+        <li>
+          <%= link_to "Notes", notes_path, remote: true %>
+          <ul>
+            <% @notes.each do |note| %>
+              <li>
+                <%= link_to note.title, note_path(note), remote: true %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="offset-md-1 col-md-8">
+      <div id="edit" class="d-inline-block"></div>
+      <div id="destroy" class="d-inline-block"></div>
+      <div id="note">
+        <% if !@notes_index.nil? %>
+          <%= render "public/notes/notes", notes: @notes_index %>
         <% end %>
       </div>
     </div>

@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "about", to: "homes#about"
     
+    # 投稿機能
+    resources :notes
+    
     # ユーザー設定機能
     resources :users, param: :name, path: '/', only: [:show] do
       collection do
@@ -38,6 +41,7 @@ Rails.application.routes.draw do
         patch "withdraw",         to: "users#withdraw"
       end
     end
+    
     
   end
 
