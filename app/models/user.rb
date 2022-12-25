@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :image
+  
+  has_many :notes, dependent: :destroy
 
   validates :name,
     uniqueness: true,
