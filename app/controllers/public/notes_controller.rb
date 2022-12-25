@@ -29,6 +29,13 @@ class Public::NotesController < ApplicationController
     redirect_to user_path(current_user.name), notice: "投稿内容を更新しました。"
   end
   
+  def destroy
+    @note = current_user.notes.find(params[:id])
+    # TODO:バリデーション
+    @note.destroy
+    redirect_to user_path(current_user.name), notice: "投稿を削除しました。"
+  end
+  
   private
   
   def note_params
