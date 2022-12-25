@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_one_attached :image
   
   has_many :notes, dependent: :destroy
+  has_many :note_comments, dependent: :destroy
 
   validates :name,
     uniqueness: true,
