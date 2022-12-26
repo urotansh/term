@@ -12,12 +12,13 @@ class Public::NotesController < ApplicationController
   end
 
   def index
-    @notes = current_user.notes.page(params[:page])
+    @user.find_by(name: params[:name])
+    @notes = @user.notes.page(params[:page])
   end
 
   def show
     # 投稿情報
-    @note = current_user.notes.find(params[:id])
+    @note = Note.find(params[:id])
     
     # コメント機能
     @note_comment = NoteComment.new
