@@ -16,7 +16,11 @@ class Public::NotesController < ApplicationController
   end
 
   def show
+    # 投稿情報
     @note = current_user.notes.find(params[:id])
+    
+    # コメント機能
+    @note_comment = NoteComment.new
   end
 
   def edit
