@@ -18,5 +18,10 @@ class Admin::NotesController < ApplicationController
   end
 
   def show
+    # 投稿情報
+    @note = Note.find(params[:id])
+    
+    # コメント機能
+    @note_comment = NoteComment.new
   end
 end

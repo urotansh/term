@@ -1,0 +1,17 @@
+<h4 class="d-inline-block">Title</h4>
+<div id="favorite_btn_<%= note.id %>" class="d-inline-block">
+  <i class="fas fa-heart"></i><%= note.favorites.count %>
+</div>
+<h4 class="px-2"><%= note.title %></h4>
+<h4>Content</h4>
+<textarea id="editor-preview">
+  <%= note.content %>
+</textarea>
+<h4>Comments</h4>
+<div id="comments">
+  <%= render "public/note_comments/note_comments", note_comments: note.note_comments %>
+</div>
+<div id="notice" class="text-success"></div>
+<div id="error" class="text-danger"></div>
+<div>
+</div>
