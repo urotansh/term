@@ -1,4 +1,6 @@
 class Public::NoteCommentsController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     @note_comment = NoteComment.new(note_comment_params)
     @note_comment.user_id = current_user.id
