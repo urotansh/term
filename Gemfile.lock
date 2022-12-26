@@ -277,6 +277,9 @@ DEPENDENCIES
   kaminari (~> 1.2.1)
   listen (~> 3.3)
   mysql2
+  net-imap
+  net-pop
+  net-smtp
   pry-byebug
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
