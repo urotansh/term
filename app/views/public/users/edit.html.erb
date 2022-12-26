@@ -15,10 +15,14 @@
       <% end %>
       
         <%= form_with model: @user, url: settings_profile_users_path do |f| %>
-          <%= f.label :name, 'Name'  %><br>
+        
+          <%= f.label :name, 'ユーザー名'  %><br>
           <%= f.text_field :name, class: "form-control w100" %><br>
-          <%= f.label :image, 'Image' %><br>
+          
+          <%= f.label :image, "プロフィール画像" %><br>
+          <%= image_tag @user.get_image(100, 100), class: "d-block mx-auto border" %>
           <%= f.file_field :image, accept: "image/*" %><br><br>
+        
           <div class="text-center mt-5">
             <%= f.submit "更新する", class: "btn btn-info w-50" %>
           </div>
