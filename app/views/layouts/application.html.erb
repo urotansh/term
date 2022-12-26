@@ -10,10 +10,14 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body style='font-family: "HiraginoSans-W0","Hiragino Sans","ヒラギノ角ゴシック"; font-weight: 100;'>
     <%= render "layouts/header" %>
     <p class="text-success"><%= notice %></p>
     <p class="text-danger"><%= alert %></p>
     <%= yield %>
   </body>
+  
+  <footer>
+    <%= render "layouts/footer" %>
+  </footer>
 </html>
