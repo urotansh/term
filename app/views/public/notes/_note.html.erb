@@ -1,4 +1,7 @@
-<h2>Title</h2>
+<h2 class="d-inline-block">Title</h2>
+<div id="favorite_btn_<%= note.id %>" class="d-inline-block">
+  <%= render "public/favorites/favorite_btn", note: note %>
+</div>
 <h4 class="px-2"><%= note.title %></h4>
 <h2>Content</h2>
 <textarea id="editor-preview">
