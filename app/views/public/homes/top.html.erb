@@ -1,2 +1,23 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto mt-5">
+      <p>Term はプログラミング関連の用語を記録・管理できる用語集アプリです。</p>
+      <p>他人の用語集を参考にしたりコメントやいいねができるコミュニティサイトとして利用することもできます。</p>
+      <p class="text-center mt-5">
+        <%= link_to(users_guest_sign_in_path, method: :post, class: 'btn btn-secondary btn-block') do %>
+          ゲストログイン
+        <% end %>
+      </p>
+      <p class="text-center">
+        <%= link_to(new_user_session_path, class: 'btn btn-info btn-block') do %>
+          ログイン
+        <% end %>
+      </p>
+      <p class="text-center">
+        <%= link_to(new_user_registration_path, class: 'btn btn-success btn-block') do %>
+          新規登録
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
