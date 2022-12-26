@@ -1,5 +1,6 @@
 class Public::NotesController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_matching_login_user, only: [:edit, :update]
   
   def new
     @note = Note.new
