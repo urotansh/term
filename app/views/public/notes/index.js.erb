@@ -1,3 +1,7 @@
-$("#note").html("<%= j(render 'notes', notes: @notes) %>");
+<% if params[:favorite] %>
+  $("#note").html("<h2>いいね一覧</h2><%= j(render 'notes', notes: @notes) %>");
+<% else %>
+  $("#note").html("<h2>投稿一覧</h2><%= j(render 'notes', notes: @notes) %>");
+<% end %>
 $("#edit").empty()
 $("#destroy").empty()
