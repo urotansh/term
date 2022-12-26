@@ -20,7 +20,10 @@ Rails.application.routes.draw do
     get "/", to: "homes#top"
     
     # 投稿管理機能
-    resources :notes, only: [:index, :show, :destroy]
+    resources :notes, only: [:index, :show, :destroy] do
+      # コメント管理機能
+      resources :note_comments, only: [:destroy]
+    end
     
     # ユーザー管理機能
     resources :users, param: :name, only: [:index, :show, :edit, :update]
@@ -39,7 +42,6 @@ Rails.application.routes.draw do
       resources :note_comments, only: [:create, :destroy]
       # いいね機能
       resource :favorites, only: [:create, :destroy]
-    
     end
     
     # ユーザー設定機能

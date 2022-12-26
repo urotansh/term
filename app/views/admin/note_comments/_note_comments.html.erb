@@ -1,0 +1,30 @@
+<table class="table table-sm">
+  <tbody>
+    <% note_comments.each do |note_comment| %>
+      <tr>
+        <td>
+          <%= link_to note_comment.user.name do %>
+            <%= image_tag note_comment.user.get_image(50, 50), class: "d-block mx-auto border" %><br>
+            <%= note_comment.user.name %>
+          <% end %>
+        </td>
+        <td>
+          <%= note_comment.comment %>
+        </td>
+        <td>
+          <%= link_to "コメント削除", admin_note_note_comment_path(note_comment.note, note_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%
+=begin
+%>
+<%# TODO:ページネーションのAjax化 %>
+<div class="d-flex justify-content-center">
+  <%= paginate note_comments %>
+</div>
+<%
+=end
+%>
