@@ -5,7 +5,9 @@
   <%= note.content %>
 </textarea>
 <h2>Comments</h2>
-<div id="comments"></div>
+<div id="comments">
+  <%= render "public/note_comments/note_comments", note_comments: note.note_comments.page(params[:page]).per(5) %>
+</div>
 <div id="notice" class="text-success"></div>
 <div id="error" class="text-danger"></div>
 <div>
