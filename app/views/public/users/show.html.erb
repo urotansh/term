@@ -8,13 +8,18 @@
           <%= link_to "ユーザー情報を編集する", settings_profile_users_path, class: "btn btn-outline-secondary btn-sm d-block mx-auto" %>
         <% end %>
       </div>
-      <% if @user == current_user %>
-        <div id="new" class="d-inline-block">
-          <%= link_to "新規投稿", new_note_path, class: "btn btn-primary", remote: true %>
+      <div class="d-flex justify-content-center">
+        <% if @user == current_user %>
+          <div id="new" style="width: 100px;">
+            <%= link_to "新規投稿", new_note_path, class: "btn btn-primary btn-sm", remote: true %>
+          </div>
+        <% end %>
+        <div id="index" style="width: 100px;">
+          <%= link_to "投稿一覧", notes_path(name: @user.name), class: "btn btn-light btn-sm", remote: true %>
         </div>
-      <% end %>
-      <div id="index" class="d-inline-block">
-        <%= link_to "投稿一覧", notes_path(name: @user.name), class: "btn btn-secondary", remote: true %>
+        <div id="favorite_index" style="width: 110px;">
+          <%= link_to "いいね一覧", notes_path(name: @user.name), class: "btn btn-warning btn-sm text-white", remote: true %>
+        </div>
       </div>
       <ul>
         <li>

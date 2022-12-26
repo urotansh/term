@@ -1,13 +1,13 @@
-<h2 class="d-inline-block">Title</h2>
+<h4 class="d-inline-block">Title</h4>
 <div id="favorite_btn_<%= note.id %>" class="d-inline-block">
   <%= render "public/favorites/favorite_btn", note: note %>
 </div>
 <h4 class="px-2"><%= note.title %></h4>
-<h2>Content</h2>
+<h4>Content</h4>
 <textarea id="editor-preview">
   <%= note.content %>
 </textarea>
-<h2>Comments</h2>
+<h4>Comments</h4>
 <div id="comments">
   <%= render "public/note_comments/note_comments", note_comments: note.note_comments.page(params[:page]).per(5) %>
 </div>
