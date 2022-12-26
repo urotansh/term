@@ -40,6 +40,7 @@
       <div id="destroy" class="text-right"></div>
       <div id="note">
         <% if !@notes_index.nil? %>
+          <h2>投稿一覧</h2>
           <%= render "public/notes/notes", notes: @notes_index %>
         <% end %>
       </div>

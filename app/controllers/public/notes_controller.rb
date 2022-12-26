@@ -20,11 +20,15 @@ class Public::NotesController < ApplicationController
       @user = User.find_by(name: params[:name])
       @note_ids = @user.favorites.pluck(:note_id)
       @notes = Note.find(@note_ids)
+      # TODO:ページネーションのAjax化
+      @notes_ajax = @notes
       # where/findなどを使用するとArrayオブジェクトになるため、Kaminariオブジェクトを呼び出す
       @notes = Kaminari.paginate_array(@notes).page(params[:page])
     else
       @user = User.find_by(name: params[:name])
       @notes = @user.notes.page(params[:page])
+      # TODO:ページネーションのAjax化
+      @notes_ajax = @user.notes
     end
   end
 
