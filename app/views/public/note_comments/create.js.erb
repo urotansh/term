@@ -1,0 +1,4 @@
+$("#notice").html("<h3>コメント投稿が成功しました。<h3>");
+$("#error").empty("");
+$("#comments").html("<%= j(render 'public/note_comments/note_comments', note_comments: @note.note_comments.page(params[:page]).per(5)) %>");
+$("#note_comment_comment").val("");
