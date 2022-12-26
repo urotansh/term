@@ -27,7 +27,8 @@ Rails.application.routes.draw do
   # ユーザー機能
   scope module: :public do
     root to: "homes#top"
-    get "about", to: "homes#about"
+    # TODO:Aboutページ実装
+    # get "about", to: "homes#about"
     
     # 投稿機能
     resources :notes do

@@ -1,57 +1,62 @@
 <header class="sticky-top">
   <nav class="navbar navbar-dark bg-dark navbar-expand-lg text-white">
     <div class="container">
-      <a class="navbar-brand text-white" href="/">Term</a>
+      <a class="navbar-brand text-white" href="/">
+        <h2 class="d-inline-block">
+          > Term
+        </h2>
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end mx-3" id="navbarNavDropdown">
+      <div class="collapse navbar-collapse justify-content-start mx-3" id="navbarNavDropdown">
         <div class="flex-column">
-          <p>admin:<span class="text-danger"><%= current_admin.name if admin_signed_in? %></span></p>
-          <p>user:<span class="text-info"><%= current_user.name if user_signed_in? %></span></p>
+          <% if admin_signed_in? %>
+            <p class="m-0">管理者:<span class="text-danger"> <%= current_admin.name %></span></p>
+          <% end %>
+          <% if user_signed_in? %>
+            <p class="m-0">ユーザー名:<span class="text-success"> <%= current_user.name %></span></p>
+          <% end %>
         </div>
       </div>
       <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-            <li>
-              <%= link_to "トップページ", root_path, class: "btn btn-outline-light mx-3" %>
-            </li>
-            <li>
-              <%= link_to "管理者トップページ", admin_path, class: "btn btn-outline-light mx-3" %>
-            </li>
-            <li>
-              <%= link_to "アバウトページ", about_path, class: "btn btn-outline-light mx-3" %>
-            </li>
-          <% if user_signed_in? %>
-            <li>
-              <%= link_to "マイページ", user_path(current_user.name), class: "btn btn-outline-light mx-3" %>
-            </li>
-            <li>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
-            </li>
+          <% if request.fullpath.include? "/admin" %>
+            <% if admin_signed_in? %>
+              <li>
+                <%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-outline-light mx-3" %>
+              </li>
+              <li>
+                <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn-outline-light mx-3" %>
+              </li>
+            <% end %>
           <% else %>
-            <li>
-              <%= link_to "サインアップ", new_user_registration_path, class: "btn btn-outline-light mx-3" %>
-            </li>
-            <li>
-              <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-light mx-3" %>
-            </li>
-            <li>
-              <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-light mx-3" %>
-            </li>
-          <% end %>
-          
-          <% if admin_signed_in? %>
-            <li>
-              <%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-outline-light mx-3" %>
-            </li>
-            <li>
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn-outline-light mx-3" %>
-            </li>
+            <% if user_signed_in? %>
+              <%# TODO:Aboutページ実装 %>
+              <%# <li> %>
+                <%#= link_to "アバウトページ", about_path, class: "btn btn-outline-light mx-3" %>
+              <%# </li> %>
+              <li>
+                <%= link_to "マイページ", user_path(current_user.name), class: "btn btn-outline-light mx-3" %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-light mx-3" %>
+              </li>
+              <li>
+                <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-light mx-3" %>
+              </li>
+              <li>
+                <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-light mx-3" %>
+              </li>
+            <% end %>
           <% end %>
         </ul>
       </div>
