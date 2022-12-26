@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     resources :notes do
       # コメント機能
       resources :note_comments, only: [:create, :destroy]
+      # いいね機能
+      resource :favorites, only: [:create, :destroy]
     
     end
     

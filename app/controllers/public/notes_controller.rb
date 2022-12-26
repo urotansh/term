@@ -12,7 +12,7 @@ class Public::NotesController < ApplicationController
   end
 
   def index
-    @user.find_by(name: params[:name])
+    @user = User.find_by(name: params[:name])
     @notes = @user.notes.page(params[:page])
   end
 
