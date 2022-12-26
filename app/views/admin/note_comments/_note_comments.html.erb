@@ -12,9 +12,7 @@
           <%= note_comment.comment %>
         </td>
         <td>
-          <% if note_comment.user == current_user %>
-            <%= link_to "コメント削除", note_note_comment_path(note_comment.note, note_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
-          <% end %>
+          <%= link_to "コメント削除", admin_note_note_comment_path(note_comment.note, note_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
         </td>
       </tr>
     <% end %>

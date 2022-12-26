@@ -19,7 +19,12 @@ class Admin::UsersController < ApplicationController
   end
   
   def show
+    # ユーザー情報
     @user = User.find_by(name: params[:name])
+    
+    # ユーザー投稿情報
+    @notes = @user.notes
+    @notes_index = @notes.page(params[:page])
   end
   
   private
