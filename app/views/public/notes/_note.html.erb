@@ -5,10 +5,12 @@
   <%= note.content %>
 </textarea>
 <h2>Comments</h2>
-
+<div id="comments"></div>
+<div id="notice" class="text-success"></div>
+<div id="error" class="text-danger"></div>
 <div>
-  <%= form_with model: [note, note_comment] do |f| %>
+  <%= form_with model: [note, note_comment], local: false do |f| %>
     <%= f.text_area :comment, rows: "5", class: "form-control w100 mb-1" %>
-    <%= f.submit "コメント投稿" %>
+    <%= f.submit "コメント投稿", class: "btn btn-info"  %>
   <% end %>
 </div>
