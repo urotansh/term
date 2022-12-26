@@ -15,10 +15,10 @@
           </div>
         <% end %>
         <div id="index" style="width: 100px;">
-          <%= link_to "投稿一覧", notes_path(name: @user.name), class: "btn btn-light btn-sm", remote: true %>
+          <%= link_to "投稿一覧", notes_path(name: @user.name), class: "btn btn-dark btn-sm", remote: true %>
         </div>
         <div id="favorite_index" style="width: 110px;">
-          <%= link_to "いいね一覧", notes_path(name: @user.name), class: "btn btn-warning btn-sm text-white", remote: true %>
+          <%= link_to "いいね一覧", notes_path(name: @user.name, favorite: true), class: "btn btn-warning btn-sm text-white", remote: true %>
         </div>
       </div>
       <ul>
