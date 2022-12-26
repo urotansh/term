@@ -13,7 +13,7 @@
         </td>
         <td>
           <% if note_comment.user == current_user %>
-            <%= link_to 'Destroy', note_note_comment_path(note_comment.note, note_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+            <%= link_to "コメント削除", note_note_comment_path(note_comment.note, note_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
           <% end %>
         </td>
       </tr>

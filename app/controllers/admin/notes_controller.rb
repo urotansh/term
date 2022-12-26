@@ -24,4 +24,12 @@ class Admin::NotesController < ApplicationController
     # コメント機能
     @note_comment = NoteComment.new
   end
+  
+  def destroy
+    @note = Note.find(params[:id])
+    # TODO:バリデーション
+    @note.destroy
+    redirect_to admin_user_path(@note.user.name), notice: "投稿を削除しました。"
+  end
+  
 end
