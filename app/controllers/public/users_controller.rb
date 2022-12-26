@@ -1,10 +1,10 @@
 class Public::UsersController < ApplicationController
   def show
     # ユーザー情報
-    @user = current_user
+    @user = User.find_by(name: params[:name])
     
     # ユーザー投稿情報
-    @notes = current_user.notes
+    @notes = @user.notes
     @notes_index = @notes.page(params[:page])
   end
 

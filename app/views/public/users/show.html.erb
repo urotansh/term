@@ -16,7 +16,7 @@
         <%= link_to "New", new_note_path, class: "btn btn-primary", remote: true %>
       </div>
       <div id="index" class="d-inline-block">
-        <%= link_to "Index", notes_path, class: "btn btn-secondary", remote: true %>
+        <%= link_to "Index", notes_path(name: @user.name), class: "btn btn-secondary", remote: true %>
       </div>
       <ul>
         <li>
