@@ -8,6 +8,7 @@ class User < ApplicationRecord
   
   has_many :notes, dependent: :destroy
   has_many :note_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   validates :name,
     uniqueness: true,
