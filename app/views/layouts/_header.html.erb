@@ -20,58 +20,52 @@
         </div>
       </div>
       <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <% if request.fullpath.include? "/admin" %>
-            <% if admin_signed_in? %>
-              <li>
-                <%= form_with url: notes_path, method: :get, class: "d-flex" do |f| %>
-                  <%= f.text_field :keyword, placeholder: "検索", class: "form-control w-50" %>
-                  <%= f.hidden_field :note_search, :value => "true" %>
-                  <%= f.submit "投稿検索", class: "btn btn-outline-light mx-3" %>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-outline-light mx-3" %>
-              </li>
-              <li>
-                <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
-              </li>
-            <% else %>
-              <li>
-                <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn-outline-light mx-3" %>
-              </li>
-            <% end %>
-          <% else %>
-            <% if user_signed_in? %>
-              <li>
-                <%= form_with url: notes_path, method: :get, class: "d-flex" do |f| %>
-                  <%= f.text_field :keyword, placeholder: "検索", class: "form-control w-50" %>
-                  <%= f.hidden_field :note_search, :value => "true" %>
-                  <%= f.submit "投稿検索", class: "btn btn-outline-light mx-3" %>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to "マイページ", user_path(current_user.name), class: "btn btn-outline-light mx-3" %>
-              </li>
-              <li>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
-              </li>
-            <% else %>
-              <li>
-                <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-light mx-3" %>
-              </li>
-              <li>
-                <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-light mx-3" %>
-              </li>
-              <li>
-                <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-light mx-3" %>
-              </li>
-            <% end %>
+        <ul class="navbar-nav">
+          <% if admin_signed_in? || user_signed_in? %>
+          <ul class="navbar-nav">
+            <li>
+              <%= form_with url: notes_path, method: :get, class: "d-flex" do |f| %>
+                <%= f.text_field :keyword, placeholder: "タグ検索", class: "form-control w-100" %>
+                <%= f.hidden_field :tag_search, :value => "true" %>
+                <%= f.submit "タグ検索", class: "btn btn-outline-light mx-3" %>
+              <% end %>
+              <%= form_with url: notes_path, method: :get, class: "d-flex" do |f| %>
+                <%= f.text_field :keyword, placeholder: "投稿検索", class: "form-control w-100" %>
+                <%= f.hidden_field :note_search, :value => "true" %>
+                <%= f.submit "投稿検索", class: "btn btn-outline-light mx-3" %>
+              <% end %>
+            </li>
+          </ul>
           <% end %>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="mt-1 mx-3">
-          </li>
+          <% if admin_signed_in? %>
+            <li>
+              <%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-outline-light mx-3" %>
+            </li>
+            <li>
+              <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
+            </li>
+          <% else %>
+          <% if request.fullpath.include? "/admin" %>
+            <li>
+              <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn-outline-light mx-3" %>
+            </li>
+          <% end %>
+          <% end %>
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to "マイページ", user_path(current_user.name), class: "btn btn-outline-light mx-3" %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-light mx-3" %>
+            </li>
+            <li>
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-light mx-3" %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>

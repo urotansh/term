@@ -19,9 +19,18 @@ class Public::NotesController < ApplicationController
 
   def index
     if params[:note_search]
-      @note_search_keyword = params[:keyword]
-      @notes = Note.search(@note_search_keyword).page(params[:page])
-      @notes_count = Note.search(@note_search_keyword).size
+      @search_keyword = params[:keyword]
+      @notes = Note.search(@search_keyword).page(params[:page])
+      @notes_count = Note.search(@search_keyword).size
+    elsif params[:tag_search]
+      @search_keyword = params[:keyword]
+      tags = Tag.search(@search_keyword)
+      tag_ids = tags.pluck(:id)
+      note_tags = NoteTag.where(tag_id: tag_ids)
+      note_ids = note_tags.pluck(:note_id)
+      @notes = Note.find(note_ids)
+      @notes_count = @notes.size
+      @notes = Kaminari.paginate_array(@notes).page(params[:page])
     else
       # TODO:DRY
       if params[:favorite]

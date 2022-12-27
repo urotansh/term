@@ -1,8 +1,8 @@
 <div class="container">
     <h2>投稿一覧(全<%= @notes_count %>件)</h2>
-      <% if !@note_search_keyword.nil? %>
-        <% if !@note_search_keyword.empty?%>
-          <h4>検索ワード："<%= @note_search_keyword %>"</h4>
+      <% if !@search_keyword.nil? %>
+        <% if !@search_keyword.empty?%>
+          <h4>検索ワード："<%= @search_keyword %>"</h4>
         <% end %>
       <% end %>
   <div class="row">
