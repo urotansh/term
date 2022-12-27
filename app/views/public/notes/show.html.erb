@@ -11,6 +11,14 @@
         <% end %>
       </div>
       <h4 class="px-2"><%= @note.title %></h4>
+      <h4>Tag</h4>
+      <div>
+        <% @note.tags.each do |tag| %>
+          <li style="list-style: none;">
+            <%= tag.name %>
+          </li>
+        <% end %>
+      </div>
       <h4>Content</h4>
       <textarea id="editor-preview" class="form-control w100 mb-1" rows="5">
         <%= @note.content %>

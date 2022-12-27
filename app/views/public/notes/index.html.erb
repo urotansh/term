@@ -1,8 +1,8 @@
 <div class="container">
     <h2>投稿一覧(全<%= @notes_count %>件)</h2>
-      <% if !@note_search_keyword.nil? %>
-        <% if !@note_search_keyword.empty?%>
-          <h4>検索ワード："<%= @note_search_keyword %>"</h4>
+      <% if !@search_keyword.nil? %>
+        <% if !@search_keyword.empty?%>
+          <h4>検索ワード："<%= @search_keyword %>"</h4>
         <% end %>
       <% end %>
   <div class="row">
@@ -10,6 +10,7 @@
       <thead class="bg-light">
         <tr>
           <th>Title</th>
+          <th>Tag</th>
           <th>Content</th>
           <th>登録日時</th>
           <th>更新日時</th>
@@ -20,6 +21,13 @@
         <% @notes.each do |note| %>
           <tr>
             <td><%= link_to note.title, note_path(note) %></td>
+            <td>
+              <% note.tags.each do |tag| %>
+                <li style="list-style: none;">
+                  <%= tag.name %>
+                </li>
+              <% end %>
+            </td>
             <td><%= note.content.slice(/\w+/).slice(1..20) %></td>
             <td><%= note.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
             <td><%= note.updated_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
