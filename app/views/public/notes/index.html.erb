@@ -1,18 +1,21 @@
-<div class="container">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-10 mx-auto">
     <h2>投稿一覧(全<%= @notes_count %>件)</h2>
       <% if !@search_keyword.nil? %>
         <% if !@search_keyword.empty?%>
           <h4>検索ワード："<%= @search_keyword %>"</h4>
         <% end %>
       <% end %>
-  <div class="row">
-    <table class="table table-hover shadow-lg">
-      <thead class="bg-light">
+    <table class="table table-hover table-sm">
+      <thead>
         <tr>
           <th>投稿ユーザー</th>
           <th>Title</th>
           <th>Tag</th>
           <th>Content</th>
+          <th>コメント数</th>
+          <th>いいね数</th>
           <th>登録日時</th>
           <th>更新日時</th>
         </tr>
@@ -22,9 +25,16 @@
           <tr>
             <td>
               <div class="mb-3">
-                <%= link_to user_path(note.user.name) do %>
-                  <%= image_tag note.user.get_image(50, 50) %>
-                  <%= note.user.name %>
+                <% if admin_signed_in? %>
+                  <%= link_to admin_user_path(note.user.name) do %>
+                    <%= image_tag note.user.get_image(50, 50) %>
+                    <%= note.user.name %>
+                  <% end %>
+                <% else %>
+                  <%= link_to user_path(note.user.name) do %>
+                    <%= image_tag note.user.get_image(50, 50) %>
+                    <%= note.user.name %>
+                  <% end %>
                 <% end %>
               </div>
             </td>
@@ -37,6 +47,8 @@
               <% end %>
             </td>
             <td><%= note.content.slice(0..20) %></td>
+            <td><%= note.note_comments.count %>件</td>
+            <td><i class="fas fa-heart"></i><%= note.favorites.count %></td>
             <td><%= note.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
             <td><%= note.updated_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
@@ -45,8 +57,9 @@
       </tbody>
     </table>
     <%# TODO:ページネーションのAjax化 %>
-    <div class="mx-auto">
+    <div class="d-flex justify-content-center">
       <%= paginate @notes %>
+    </div>
     </div>
   </div>
 </div>

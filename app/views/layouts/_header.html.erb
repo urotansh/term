@@ -9,7 +9,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-start mx-3" id="navbarNavDropdown">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
         <div class="flex-column">
           <% if admin_signed_in? %>
             <p class="m-0">管理者:<span class="text-danger"> <%= current_admin.name %></span></p>
@@ -23,14 +23,14 @@
         <ul class="navbar-nav">
           <% if admin_signed_in? || user_signed_in? %>
           <ul class="navbar-nav">
-            <li>
-              <%= form_with url: notes_path, method: :get, class: "d-flex" do |f| %>
-                <%= f.text_field :keyword, placeholder: "タグ検索", class: "form-control w-100" %>
+            <li class>
+              <%= form_with url: notes_path, method: :get, class: "d-flex mb-1" do |f| %>
+                <%= f.text_field :keyword, placeholder: "タグ検索", class: "form-control" %>
                 <%= f.hidden_field :tag_search, :value => "true" %>
                 <%= f.submit "タグ検索", class: "btn btn-outline-light mx-3" %>
               <% end %>
               <%= form_with url: notes_path, method: :get, class: "d-flex" do |f| %>
-                <%= f.text_field :keyword, placeholder: "投稿検索", class: "form-control w-100" %>
+                <%= f.text_field :keyword, placeholder: "投稿検索", class: "form-control" %>
                 <%= f.hidden_field :note_search, :value => "true" %>
                 <%= f.submit "投稿検索", class: "btn btn-outline-light mx-3" %>
               <% end %>
@@ -44,12 +44,10 @@
             <li>
               <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
             </li>
-          <% else %>
-          <% if request.fullpath.include? "/admin" %>
+          <% elsif request.fullpath.include? "/admin" %>
             <li>
               <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn-outline-light mx-3" %>
             </li>
-          <% end %>
           <% end %>
           <% if user_signed_in? %>
             <li>
@@ -59,6 +57,9 @@
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-light mx-3" %>
             </li>
           <% else %>
+            <li>
+              <%= link_to "トップページ", root_path, class: "btn btn-outline-light mx-3" %>
+            </li>
             <li>
               <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-light mx-3" %>
             </li>
