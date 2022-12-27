@@ -1,9 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="mx-auto mt-5">
-      <p>Term はプログラミング関連の用語を記録・管理できる用語集アプリです。</p>
+    <h5 class="mt-5 pl-5 mx-auto" style='font-family: "HiraginoSans-W1"'>
+      <p>T&nbsp;e&nbsp;r&nbsp;m&nbsp;はプログラミング関連の用語を記録・管理できる用語集アプリです。</p>
       <p>他人の用語集を参考にしたりコメントやいいねができるコミュニティサイトとして利用することもできます。</p>
-      <p class="text-center mt-5">
+    </h5>
+    <div class="col-6 mx-auto">
+      <p class="text-center mt-3">
         <%= link_to(users_guest_sign_in_path, method: :post, class: 'btn btn-secondary btn-block') do %>
           ゲストログイン
         <% end %>

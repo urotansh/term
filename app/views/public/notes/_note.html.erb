@@ -4,10 +4,13 @@
 </div>
 <h4 class="px-2"><%= note.title %></h4>
 <h4>Tag</h4>
-<div>
-  <% note.tags.each do |tag| %>
+<div class="d-flex justify-content-start">
+  <% note.tags.each_with_index do |tag, i| %>
     <li style="list-style: none;">
-      <%= tag.name %>
+      <%= link_to notes_path(tag_search: true, keyword: tag.name) do %>
+        #<%= tag.name %>
+      <% end %>
+      <% unless note.tags.length == i + 1 %>,<% end %>
     </li>
   <% end %>
 </div>
@@ -23,7 +26,7 @@
 <div id="error" class="text-danger"></div>
 <div>
   <%= form_with model: [note, note_comment], local: false do |f| %>
-    <%= f.text_area :comment, rows: "5", class: "form-control w100 mb-1" %>
     <%= f.submit "コメント投稿", class: "btn btn-info"  %>
+    <%= f.text_area :comment, rows: "5", class: "form-control w100 mb-1" %>
   <% end %>
 </div>

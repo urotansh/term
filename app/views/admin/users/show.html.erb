@@ -4,14 +4,14 @@
       <div class="shadow-lg p-1 shadow-lg rounded">
         <%= image_tag @user.get_image(100, 100), class: "d-block mx-auto border" %>
         <p class="text-center"><%= @user.name %></p>
-          <%= link_to "ユーザー情報を編集する", edit_admin_user_path(@user.name), class: "btn btn-outline-secondary btn-sm d-block mx-auto" %>
+          <%= link_to "ユーザー情報を編集する", edit_admin_user_path(@user.name), class: "btn btn-secondary btn-sm d-block mx-auto" %>
       </div>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center my-1">
         <div id="index" style="width: 100px;">
-          <%= link_to "投稿一覧", admin_notes_path(name: @user.name), class: "btn btn-dark btn-sm", remote: true %>
+          <%= link_to "投稿一覧", admin_notes_path(name: @user.name), class: "btn btn-info btn-sm", remote: true %>
         </div>
         <div id="favorite_index" style="width: 110px;">
-          <%= link_to "いいね一覧", admin_notes_path(name: @user.name, favorite: true), class: "btn btn-warning btn-sm text-white", remote: true %>
+          <%= link_to "いいね一覧", admin_notes_path(name: @user.name, favorite: true), class: "btn btn-success btn-sm", remote: true %>
         </div>
       </div>
       <ul>
@@ -29,8 +29,10 @@
     </div>
 
     <div class="offset-md-1 col-md-8">
-      <div id="edit" class="text-left"></div>
-      <div id="destroy" class="text-right"></div>
+      <div class="d-flex justify-content-between align-items-end">
+        <div id="edit"></div>
+        <div id="destroy"></div>
+      </div>
       <div id="note">
         <h2>投稿一覧</h2>
         <% if !@notes_index.nil? %>
