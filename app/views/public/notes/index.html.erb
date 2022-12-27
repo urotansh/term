@@ -42,7 +42,9 @@
             <td>
               <% note.tags.each do |tag| %>
                 <li style="list-style: none;">
-                  <%= tag.name %>
+                  <%= link_to notes_path(tag_search: true, keyword: tag.name) do %>
+                    <%= tag.name %>
+                  <% end %>
                 </li>
               <% end %>
             </td>

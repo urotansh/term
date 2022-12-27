@@ -19,10 +19,13 @@
       </div>
       <h4 class="px-2"><%= @note.title %></h4>
       <h4>Tag</h4>
-      <div>
-        <% @note.tags.each do |tag| %>
+      <div class="d-flex justify-content-start">
+        <% @note.tags.each_with_index do |tag, i| %>
           <li style="list-style: none;">
-            <%= tag.name %>
+            <%= link_to notes_path(tag_search: true, keyword: tag.name) do %>
+              #<%= tag.name %>
+            <% end %>
+            <% unless @note.tags.length == i + 1 %>,<% end %>
           </li>
         <% end %>
       </div>
