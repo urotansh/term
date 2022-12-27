@@ -1,5 +1,5 @@
 class Public::NotesController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update]
   
   def new
@@ -15,20 +15,26 @@ class Public::NotesController < ApplicationController
   end
 
   def index
-    # TODO:DRY
-    if params[:favorite]
-      @user = User.find_by(name: params[:name])
-      @note_ids = @user.favorites.pluck(:note_id)
-      @notes = Note.find(@note_ids)
-      # TODO:ページネーションのAjax化
-      @notes_ajax = @notes
-      # where/findなどを使用するとArrayオブジェクトになるため、Kaminariオブジェクトを呼び出す
-      @notes = Kaminari.paginate_array(@notes).page(params[:page])
+    if params[:note_search]
+      @note_search_keyword = params[:keyword]
+      @notes = Note.search(@note_search_keyword).page(params[:page])
+      @notes_count = Note.search(@note_search_keyword).size
     else
-      @user = User.find_by(name: params[:name])
-      @notes = @user.notes.page(params[:page])
-      # TODO:ページネーションのAjax化
-      @notes_ajax = @user.notes
+      # TODO:DRY
+      if params[:favorite]
+        @user = User.find_by(name: params[:name])
+        @note_ids = @user.favorites.pluck(:note_id)
+        @notes = Note.find(@note_ids)
+        # TODO:ページネーションのAjax化
+        @notes_ajax = @notes
+        # where/findなどを使用するとArrayオブジェクトになるため、Kaminariオブジェクトを呼び出す
+        @notes = Kaminari.paginate_array(@notes).page(params[:page])
+      else
+        @user = User.find_by(name: params[:name])
+        @notes = @user.notes.page(params[:page])
+        # TODO:ページネーションのAjax化
+        @notes_ajax = @user.notes
+      end
     end
   end
 

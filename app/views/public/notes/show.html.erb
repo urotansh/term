@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <h2>投稿詳細</h2>
+      <h4 class="d-inline-block">Title</h4>
+      <div id="favorite_btn_<%= @note.id %>" class="d-inline-block">
+        <% if admin_signed_in? %>
+          <i class="fas fa-heart"></i><%= @note.favorites.count %>
+        <% else %>
+          <%= render "public/favorites/favorite_btn", note: @note %>
+        <% end %>
+      </div>
+      <h4 class="px-2"><%= @note.title %></h4>
+      <h4>Content</h4>
+      <textarea id="editor-preview" class="form-control w100 mb-1" rows="5">
+        <%= @note.content %>
+      </textarea>
+<%
+=begin
+%>
+      <h4>Comments</h4>
+      <div id="comments">
+        <% if admin_signed_in? %>
+          <%= render "admin/note_comments/note_comments", note_comments: @note.note_comments %>
+        <% else %>
+          <%= render "public/note_comments/note_comments", note_comments: @note.note_comments %>
+        <% end %>
+      </div>
+      <div id="notice" class="text-success"></div>
+      <div id="error" class="text-danger"></div>
+<%
+=end
+%>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,13 @@
           <% if request.fullpath.include? "/admin" %>
             <% if admin_signed_in? %>
               <li>
+                <%= form_with url: notes_path, method: :get, class: "d-flex" do |f| %>
+                  <%= f.text_field :keyword, placeholder: "検索", class: "form-control w-50" %>
+                  <%= f.hidden_field :note_search, :value => "true" %>
+                  <%= f.submit "投稿検索", class: "btn btn-outline-light mx-3" %>
+                <% end %>
+              </li>
+              <li>
                 <%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-outline-light mx-3" %>
               </li>
               <li>
@@ -36,10 +43,13 @@
             <% end %>
           <% else %>
             <% if user_signed_in? %>
-              <%# TODO:Aboutページ実装 %>
-              <%# <li> %>
-                <%#= link_to "アバウトページ", about_path, class: "btn btn-outline-light mx-3" %>
-              <%# </li> %>
+              <li>
+                <%= form_with url: notes_path, method: :get, class: "d-flex" do |f| %>
+                  <%= f.text_field :keyword, placeholder: "検索", class: "form-control w-50" %>
+                  <%= f.hidden_field :note_search, :value => "true" %>
+                  <%= f.submit "投稿検索", class: "btn btn-outline-light mx-3" %>
+                <% end %>
+              </li>
               <li>
                 <%= link_to "マイページ", user_path(current_user.name), class: "btn btn-outline-light mx-3" %>
               </li>
@@ -58,6 +68,10 @@
               </li>
             <% end %>
           <% end %>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="mt-1 mx-3">
+          </li>
         </ul>
       </div>
     </div>
