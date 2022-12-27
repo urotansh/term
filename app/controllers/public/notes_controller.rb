@@ -9,8 +9,11 @@ class Public::NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     @note.user_id = current_user.id
+    tag_list = params[:note][:tag_name].split(',')
+    
     # TODO:バリデーション
     @note.save
+    @note.save_tags(tag_list)
     redirect_to user_path(current_user.name), notice: "新規投稿が成功しました。"
   end
 
