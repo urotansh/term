@@ -9,6 +9,7 @@
       <thead class="bg-light">
         <tr>
           <th>ユーザーID</th>
+          <th></th>
           <th>ユーザー名</th>
           <th>メールアドレス</th>
           <th>ステータス</th>
@@ -22,6 +23,19 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= user.id %></td>
+            <td>
+              <div class="mb-3">
+                <% if admin_signed_in? %>
+                  <%= link_to admin_user_path(user.name) do %>
+                    <%= image_tag user.get_image(30, 30) %>
+                  <% end %>
+                <% else %>
+                  <%= link_to user_path(user.name) do %>
+                    <%= image_tag user.get_image(30, 30) %>
+                  <% end %>
+                <% end %>
+              </div>
+            </td>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
             <% if user.is_deleted == false %>
