@@ -2,6 +2,13 @@
   <div class="row">
     <div class="col-12 mx-auto">
       <h2>投稿詳細</h2>
+      <h4>投稿ユーザー</h4>
+      <div class="mb-3">
+        <%= link_to user_path(@note.user.name) do %>
+          <%= image_tag @note.user.get_image(50, 50) %>
+          <h4 class="d-inline-block"><%= @note.user.name %></h4>
+        <% end %>
+      </div>
       <h4 class="d-inline-block">Title</h4>
       <div id="favorite_btn_<%= @note.id %>" class="d-inline-block">
         <% if admin_signed_in? %>
