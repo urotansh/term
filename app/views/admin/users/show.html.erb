@@ -14,28 +14,29 @@
           <%= link_to "いいね一覧", admin_notes_path(name: @user.name, favorite: true), class: "btn btn-success btn-sm", remote: true %>
         </div>
       </div>
+      <div id="jstree">
       <ul>
-        <li>
+        <li data-jstree='{ "icon" : "fa fa-folder", "opened" : true }'>
           <%= link_to "フォルダ", admin_notes_path(name: @user.name), remote: true %>
           <ul>
             <% @notes.each do |note| %>
-              <li>
+              <li data-jstree='{ "icon" : "far fa-file" }'>
                 <%= link_to note.title, admin_note_path(note), remote: true %>
               </li>
             <% end %>
           </ul>
         </li>
       </ul>
+      </div>
     </div>
-
     <div class="offset-md-1 col-md-8">
       <div class="d-flex justify-content-between align-items-end">
         <div id="edit"></div>
         <div id="destroy"></div>
       </div>
       <div id="note">
-        <h2>投稿一覧</h2>
         <% if !@notes_index.nil? %>
+        <h2>投稿一覧</h2>
           <%= render "admin/notes/notes", notes: @notes_index %>
         <% end %>
       </div>
