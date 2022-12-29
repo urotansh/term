@@ -9,6 +9,7 @@ class Public::UsersController < ApplicationController
     # ユーザー投稿情報
     @notes = @user.notes
     @notes_index = @notes.page(params[:page])
+    @favorite_notes = @user.favorite_notes
   end
 
   def edit

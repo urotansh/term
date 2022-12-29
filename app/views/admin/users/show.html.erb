@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-2">
       <div class="shadow-lg p-1 shadow-lg rounded">
-        <%= image_tag @user.get_image(100, 100), class: "d-block mx-auto border" %>
+        <%= image_tag @user.get_image(80, 80), class: "d-block mx-auto border" %>
         <p class="text-center"><%= @user.name %></p>
           <%= link_to "ユーザー情報を編集する", edit_admin_user_path(@user.name), class: "btn btn-secondary btn-sm d-block mx-auto" %>
       </div>
@@ -15,18 +15,32 @@
         </div>
       </div>
       <div id="jstree">
-      <ul>
-        <li data-jstree='{ "icon" : "fa fa-folder", "opened" : true }'>
-          <%= link_to "フォルダ", admin_notes_path(name: @user.name), remote: true %>
-          <ul>
-            <% @notes.each do |note| %>
-              <li data-jstree='{ "icon" : "far fa-file" }'>
-                <%= link_to note.title, admin_note_path(note), remote: true %>
-              </li>
-            <% end %>
-          </ul>
-        </li>
-      </ul>
+        <%# 投稿一覧 %>
+        <ul>
+          <li data-jstree='{ "icon" : "fa fa-folder", "opened" : true }'>
+            <%= link_to "投稿一覧", admin_notes_path(name: @user.name), remote: true %>
+            <ul>
+              <% @notes.each do |note| %>
+                <li data-jstree='{ "icon" : "far fa-file" }'>
+                  <%= link_to note.title, admin_note_path(note), remote: true %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+        <%# いいね一覧 %>
+        <ul>
+          <li data-jstree='{ "icon" : "fas fa-heart", "opened" : true }'>
+            <%= link_to "いいね一覧", admin_notes_path(name: @user.name, favorite: true), remote: true %>
+            <ul>
+              <% @favorite_notes.each do |note| %>
+                <li data-jstree='{ "icon" : "far fa-file" }'>
+                  <%= link_to note.title, admin_note_path(note), remote: true %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="offset-md-1 col-md-8">
