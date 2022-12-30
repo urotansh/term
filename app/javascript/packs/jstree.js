@@ -1,5 +1,5 @@
-import '../../../node_modules/jstree/dist/themes/default/style.min.css';
 import $ from 'jquery';
+import 'jstree/dist/themes/default/style.min.css';
 import 'jstree'
 
 document.addEventListener('DOMContentLoaded', () => {

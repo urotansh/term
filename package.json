@@ -9,6 +9,7 @@
     "@rails/webpacker": "5.4.3",
     "bootstrap": "4.5",
     "easymde": "^2.18.0",
+    "highlightjs": "^9.16.2",
     "jquery": "^3.6.3",
     "jstree": "^3.3.12",
     "popper.js": "^1.16.1",

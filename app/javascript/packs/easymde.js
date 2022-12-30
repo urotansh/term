@@ -1,18 +1,24 @@
 import 'easymde/dist/easymde.min.css'
 import EasyMDE from "easymde";
+import 'highlightjs/styles/monokai.css';
+import hljs from 'highlightjs'
 
 'ajax:complete turbolinks:load'.split(' ').forEach((eventName)=>{
   document.addEventListener(eventName, (e)=>{
+    if (document.getElementById("comment_post_flg") != null){
+    return;
+    };
     if (document.getElementById("editor") != null){
     // textareaをMarkdownエディタにする
     const easymde = new EasyMDE({
       // showIcons: ["code", "table"],
-      showIcons: ["undo", "redo", "table"],
+      showIcons: ["code", "undo", "redo"],
       shortcuts: {
           "drawTable": "Cmd-Alt-T", // Markdownテーブルショートカット
       },
       renderingConfig: {
           codeSyntaxHighlighting: true,
+          hljs: hljs
       },
       sideBySideFullscreen: false,
       spellChecker: false,   // 日本語はスペルチェックに引っかかるのでスペルチェックをオフ
@@ -24,7 +30,7 @@ import EasyMDE from "easymde";
       element: document.getElementById("editor"),
     });
     easymde.toggleSideBySide();
-  };
+    };
     if (document.getElementById("editor-preview") != null){
       // textareaをMarkdownエディタにする
       const easymdePreview = new EasyMDE({
@@ -41,6 +47,7 @@ import EasyMDE from "easymde";
         scrollbarStyle: null,
         renderingConfig: {
             codeSyntaxHighlighting: true,
+            hljs: hljs
         },
         element: document.getElementById("editor-preview"),
       });
