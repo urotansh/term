@@ -6,11 +6,11 @@
         <p class="text-center"><%= @user.name %></p>
           <%= link_to "ユーザー情報を編集する", edit_admin_user_path(@user.name), class: "btn btn-secondary btn-sm d-block mx-auto" %>
       </div>
-      <div class="d-flex justify-content-center my-1">
-        <div id="index" style="width: 100px;">
+      <div class="d-flex justify-content-around my-1">
+        <div id="index">
           <%= link_to "投稿一覧", admin_notes_path(name: @user.name), class: "btn btn-info btn-sm", remote: true %>
         </div>
-        <div id="favorite_index" style="width: 110px;">
+        <div id="favorite_index">
           <%= link_to "いいね一覧", admin_notes_path(name: @user.name, favorite: true), class: "btn btn-success btn-sm", remote: true %>
         </div>
       </div>
