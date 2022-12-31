@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
         <div class="flex-column">
           <% if admin_signed_in? %>
-            <p class="m-0">管理者:&nbsp;&nbsp;<<span class="text-danger"> <%= current_admin.name %></span></p>
+            <p class="m-0">管理者:&nbsp;&nbsp;<span class="text-danger"><%= current_admin.name %></span></p>
           <% end %>
           <% if user_signed_in? %>
             <p class="m-0">ユーザー名:&nbsp;&nbsp;<%= link_to current_user.name, user_path(current_user.name), class: "text-success" %></p>
