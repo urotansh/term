@@ -4,7 +4,7 @@
     <div class="col-12">
       <h2>ユーザー一覧</h2>
     </div>
-
+    
     <div class="col-12 m-3">
       <%= search_form_for @q, url: search_admin_users_path, class: "d-flex justify-content-center align-items-center" do |f| %>
         <%= f.label :name_cont, "ユーザー名", class: "h5 text-center" %>
@@ -28,7 +28,7 @@
         </tr>
       </thead>
       <tbody class="border-bottom">
-        <% @users.each do |user| %>
+        <% @results.each do |user| %>
           <tr>
             <td><%= user.id %></td>
             <td>
@@ -61,7 +61,7 @@
       </tbody>
     </table>
     <div class="mx-auto">
-      <%= paginate @users %>
+      <%= paginate @results %>
     </div>
     
   </div>

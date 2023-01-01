@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  before_action :set_q, only: [:index, :search]
+  
   def index
     @users = User.page(params[:page])
   end
@@ -27,11 +29,20 @@ class Admin::UsersController < ApplicationController
     @notes_index = @notes.page(params[:page])
     @favorite_notes = @user.favorite_notes
   end
+
+  def search
+    @results = @q.result.page(params[:page])
+  end
+  
   
   private
   
   def user_params
     params.require(:user).permit(:name, :email, :is_deleted, :image)
+  end
+  
+  def set_q
+    @q = User.ransack(params[:q])
   end
   
 end

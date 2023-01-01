@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
-  #ゲストログイン用ルーティング
+  # ゲストログイン用ルーティング
   devise_scope :user do
     post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
-
+  
+  
+  # Deviseルーティング
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -26,7 +28,12 @@ Rails.application.routes.draw do
     end
     
     # ユーザー管理機能
-    resources :users, param: :name, only: [:index, :show, :edit, :update]
+    resources :users, param: :name, only: [:index, :show, :edit, :update] do
+      collection do
+        get "search", to: "users#search"
+      end
+    end
+    
   end
   
   
