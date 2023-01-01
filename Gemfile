@@ -60,9 +60,10 @@ gem 'hirb-unicode'
 gem 'devise'
 gem 'kaminari','~> 1.2.1'
 gem 'dotenv-rails'
-gem "net-smtp"
-gem "net-pop"
-gem "net-imap"
+gem 'net-smtp'
+gem 'net-pop'
+gem 'net-imap'
+gem 'ransack'
 
 group :production do
   gem 'mysql2'
