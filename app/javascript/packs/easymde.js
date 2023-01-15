@@ -1,8 +1,9 @@
-import 'easymde/dist/easymde.min.css'
-import EasyMDE from "easymde";
+import 'easymde/dist/easymde.min.css';
+import EasyMDE from 'easymde';
 import 'highlightjs/styles/monokai.css';
-import hljs from 'highlightjs'
+import hljs from 'highlightjs';
 
+// 新規投稿ページ/投稿詳細ページのテキストエリアをマークダウンエディタへ変更
 'ajax:complete turbolinks:load'.split(' ').forEach((eventName)=>{
   document.addEventListener(eventName, (e)=>{
     if (document.getElementById("comment_post_flg") != null){
