@@ -19,3 +19,4 @@ import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
 import "./jstree";
 import "./easymde";
+import "./fadein";
