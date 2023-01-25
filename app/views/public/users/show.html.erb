@@ -2,13 +2,19 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
+      
+      <%# ユーザープロフィール %>
       <div class="shadow-lg p-1 shadow-lg rounded">
         <%= image_tag @user.get_image(80, 80), size: "80x80", class: "d-block mx-auto border" %>
-        <p class="text-center"><%= @user.name %></p>
+        <p class="text-center m-0"><%= @user.name %></p>
+        
+        <%# ユーザー編集ボタン %>
         <% if (@user == current_user) && !(@user.name == "guestuser") %>
           <%= link_to "ユーザー情報を編集する", settings_profile_users_path, class: "btn btn-secondary btn-sm d-block mx-auto" %>
         <% end %>
       </div>
+      
+      <%# 投稿機能 %>
       <div class="d-flex justify-content-around my-1">
         <% if @user == current_user %>
           <div id="new">
@@ -22,7 +28,9 @@
           <%= link_to "いいね一覧", notes_path(name: @user.name, favorite: true), class: "btn btn-success btn-sm", remote: true %>
         </div>
       </div>
+      
       <div id="jstree">
+        <%# 投稿一覧 %>
         <ul>
           <li data-jstree='{ "icon" : "fa fa-folder", "opened" : true }'>
             <%= link_to "投稿一覧", notes_path(name: @user.name), remote: true %>
@@ -51,14 +59,10 @@
       </div>
     </div>
 
+    <%# メインメニュー %>
     <div class="offset-md-1 col-md-8">
       <div id="note">
-        <% if !@notes_pagination.nil? %>
-          <h2>投稿一覧</h2>
-          <div id="notes_pagination">
-            <%= render "layouts/notes", notes: @notes_pagination %>
-          </div>
-        <% end %>
+        <%= render "layouts/notes",  {title: @title, notes: @notes_pagination} %>
       </div>
     </div>
   </div>
