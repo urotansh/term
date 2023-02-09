@@ -77,7 +77,7 @@ class Public::NotesController < ApplicationController
   end
 
   def edit
-    @title = "投稿編集"
+    @title = I18n.t("note.edit")
     @note = current_user.notes.find(params[:id])
   end
   
