@@ -10,7 +10,7 @@ class Public::NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     @note.user_id = current_user.id
-
+    
     # タグが空白の場合
     if params[:note][:tag].empty?
       # 自然言語処理を行うプレーンテキスト情報を変数へ格納
@@ -23,11 +23,11 @@ class Public::NotesController < ApplicationController
     else
       tag_list = params[:note][:tag].split(',')
     end
-    
+      
     # TODO:バリデーション
     @note.save
     @note.save_tags(tag_list)
-    redirect_to user_path(current_user.name), notice: "新規投稿が成功しました。"
+    redirect_to user_path(current_user.name), notice: I18n.t("note.notice.create")
   end
 
   def index
@@ -71,7 +71,7 @@ class Public::NotesController < ApplicationController
     @note_comment = NoteComment.new
     @note_comments = @note.note_comments.order(updated_at: :desc)
     @note_comments_pagination = @note_comments.page(params[:page]).per(5)
-    
+
     # 遷移元URL(検索画面 or ユーザーマイページ)をセッションに保存
     session[:notes_show_previous_url] = request.referer
   end
@@ -85,16 +85,16 @@ class Public::NotesController < ApplicationController
     @note = current_user.notes.find(params[:id])
     # TODO:バリデーション
     @note.update(note_params)
-
+    
     # 遷移元URLを取得
     path = Rails.application.routes.recognize_path(request.referer)
     # ユーザーマイページからの更新の場合、ユーザーマイページへリダイレクト
     # TODO: 投稿一覧（サイドメニュー）へのタイトル更新反映、投稿詳細画面表示（非同期）
     if path[:controller].split("/")[1] == "users"
-      redirect_to user_path(current_user.name), notice: "投稿内容を更新しました。"
+      redirect_to user_path(current_user.name), notice: I18n.t("note.notice.update")
     # 検索画面からの更新の場合、投稿詳細画面へリダイレクト
     elsif path[:controller].split("/")[1] == "notes"
-      redirect_to note_path(@note), notice: "投稿内容を更新しました。"
+      redirect_to note_path(@note), notice: I18n.t("note.notice.update")
     end
   end
   
@@ -102,15 +102,15 @@ class Public::NotesController < ApplicationController
     @note = current_user.notes.find(params[:id])
     # TODO:バリデーション
     @note.destroy
-    
+        
     # 遷移元URLを取得
     path = Rails.application.routes.recognize_path(request.referer)
     # ユーザーマイページからの削除の場合、ユーザーマイページへリダイレクト
     if path[:controller].split("/")[1] == "users"
-      redirect_to user_path(current_user.name), notice: "投稿を削除しました。"
+      redirect_to user_path(current_user.name), notice: I18n.t("note.notice.destroy")
     # 検索画面からの削除の場合、検索一覧画面へリダイレクト
     elsif path[:controller].split("/")[1] == "notes"
-      redirect_to session[:notes_show_previous_url], notice: "投稿を削除しました。"
+      redirect_to session[:notes_show_previous_url], notice: I18n.t("note.notice.destroy")
     end
   end
   
