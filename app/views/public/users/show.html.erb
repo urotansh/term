@@ -8,8 +8,9 @@
         <%= image_tag @user.get_image(80, 80), size: "80x80", class: "d-block mx-auto border" %>
         <p class="text-center m-0"><%= @user.name %></p>
         
-        <%# ユーザー編集ボタン %>
+        <%# ログインユーザーのマイページである場合 かつ ユーザー名がguestuserでない場合 %>
         <% if (@user == current_user) && !(@user.name == "guestuser") %>
+          <%# プロフィール編集ボタン %>
           <%= link_to I18n.t("user.edit"), settings_profile_users_path, class: "btn btn-secondary btn-sm d-block mx-auto" %>
         <% end %>
       </div>
