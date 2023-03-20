@@ -22,10 +22,27 @@
           </div>
         </div>
         
-        <%# ログインユーザーのマイページである場合 かつ ユーザー名がguestuserでない場合 %>
-        <% if (@user == current_user) && !(@user.name == "guestuser") %>
-          <%# プロフィール編集ボタン %>
-          <%= link_to I18n.t("user.edit"), settings_profile_users_path, class: "btn btn-secondary btn-sm d-block mx-auto" %>
+        <%# ログインユーザーのマイページである場合 %>
+        <% if current_user == @user %>
+          <%# ユーザー名がguestuserの場合 %>
+          <% unless @user.name == "guestuser" %>
+            <%# プロフィール編集ボタン %>
+            <%= link_to I18n.t("user.edit"), settings_profile_users_path, class: "btn btn-secondary btn-sm d-block mx-auto" %>
+          <% end %>
+        <%# 他ユーザのマイページである場合 %>
+        <% else %>
+          <%# フォロー/フォロー解除ボタン %>
+          <div class="follow-btn-<%= @user.name %>">
+            <%# ログインユーザーがユーザーをフォローしている場合 %>
+            <% if current_user.following?(@user) %>
+              <%# フォロー解除ボタン %>
+              <%= link_to I18n.t("user.unfollow"), user_relationships_path(@user.name), method: :delete, class: "btn btn-outline-secondary btn-sm d-block mx-auto" %>
+            <%# ユーザーをフォローしていない場合 %>
+            <% else %>
+              <%# フォローするボタン %>
+              <%= link_to I18n.t("user.follow"), user_relationships_path(@user.name), method: :post, class: "btn btn-secondary btn-sm d-block mx-auto" %>
+            <% end %>
+          </div>
         <% end %>
       </div>
       
