@@ -13,12 +13,12 @@
           <div>
             <%# フォロー一覧 %>
             <p class="m-0"><%= I18n.t("user.following") %></p>
-            <p class="m-0 text-center"><%= @user.following.count %></p>
+            <p id="following" class="m-0 text-center"><%= @user.following.count %></p>
           </div>
           <div>
             <%# フォロワー一覧 %>
             <p class="m-0"><%= I18n.t("user.followers") %></p>
-            <p class="m-0 text-center"><%= @user.followers.count %></p>
+            <p id="followers" class="m-0 text-center"><%= @user.followers.count %></p>
           </div>
         </div>
         
@@ -36,11 +36,11 @@
             <%# ログインユーザーがユーザーをフォローしている場合 %>
             <% if current_user.following?(@user) %>
               <%# フォロー解除ボタン %>
-              <%= link_to I18n.t("user.unfollow"), user_relationships_path(@user.name), method: :delete, class: "btn btn-outline-secondary btn-sm d-block mx-auto" %>
+              <%= link_to I18n.t("user.unfollow"), user_relationships_path(@user.name), method: :delete, remote: true, class: "btn btn-outline-secondary btn-sm d-block mx-auto" %>
             <%# ユーザーをフォローしていない場合 %>
             <% else %>
               <%# フォローするボタン %>
-              <%= link_to I18n.t("user.follow"), user_relationships_path(@user.name), method: :post, class: "btn btn-secondary btn-sm d-block mx-auto" %>
+              <%= link_to I18n.t("user.follow"), user_relationships_path(@user.name), method: :post, remote: true, class: "btn btn-secondary btn-sm d-block mx-auto" %>
             <% end %>
           </div>
         <% end %>
