@@ -1,7 +1,7 @@
 <%# フォロー機能 %>
 
 <%# リクエスト元URLのパスパラメータに応じた条件分岐処理 %>
-<% case Rails.application.routes.recognize_path(request.referrer)[:name] %>
+<% case @path_param_name %>
 <%# リクエスト元URLのパスパラメータがログインユーザーのユーザー名と一致する場合（ログインユーザーのマイページの場合） %>
 <% when current_user.name %>
   <%# フォロー件数を更新 %>
