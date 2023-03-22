@@ -1,0 +1,55 @@
+<div class="col-12">
+  <h2><%= title %></h2>
+</div>
+
+<table class="table table-hover table-sm">
+  <thead>
+    <tr>
+      <th></th>
+      <%# ユーザー名 %>
+      <th><%= I18n.t("user.name") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="border-bottom">
+    <% users.each do |user| %>
+      <tr>
+        <td>
+          <div class="mb-3">
+            <% if admin_signed_in? %>
+              <%= link_to admin_user_path(user.name) do %>
+                <%= image_tag user.get_image(30, 30), size: "30x30" %>
+              <% end %>
+            <% else %>
+              <%= link_to user_path(user.name) do %>
+                <%= image_tag user.get_image(30, 30), size: "30x30" %>
+              <% end %>
+            <% end %>
+          </div>
+        </td>
+        <td><%= user.name %></td>
+        <td>
+          <%# フォロー/フォロー解除ボタン %>
+          <div class="follow-btn-<%= user.name %>">
+            <%# 他ユーザーのマイページの場合は、フォロー/フォロー解除ボタンを表示する %>
+            <% if current_user != user %>
+              <%# ユーザーをフォローしている場合は、フォロー解除ボタンを表示する %>
+              <% if current_user.following?(user) %>
+                <%# フォロー解除 %>
+                <%= link_to I18n.t("user.unfollow"), user_relationships_path(user.name), method: :delete, remote: true, class: "btn btn-outline-secondary btn-sm d-block mx-auto" %>
+              <%# ユーザーをフォローしてない場合は、フォローするボタンを表示する %>
+              <% else %>
+                <%# フォローする %>
+                <%= link_to I18n.t("user.follow"), user_relationships_path(user.name), method: :post, remote: true, class: "btn btn-secondary btn-sm d-block mx-auto" %>
+              <% end %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>
+<div class="mx-auto">
+  <%= paginate users %>
+</div>

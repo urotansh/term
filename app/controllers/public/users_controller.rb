@@ -40,6 +40,23 @@ class Public::UsersController < ApplicationController
     redirect_to root_path, notice: I18n.t("user.notice.withdraw")
   end
   
+  def following
+    # フォロー
+    @title = I18n.t("user.following")
+    @user  = User.find_by(name: params[:name])
+    @users = @user.following.page(params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    # フォロワー
+    @title = I18n.t("user.followers")
+    @user  = User.find_by(name: params[:name])
+    @users = @user.followers.page(params[:page])
+    render 'show_follow'
+  end
+  
+  
   private
   
   def user_params
