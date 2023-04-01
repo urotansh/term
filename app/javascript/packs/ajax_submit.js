@@ -15,6 +15,8 @@ const handleShortcutSubmit = function() {
   }
 }
 
+window.handleShortcutSubmit = handleShortcutSubmit;
+
 'ajax:complete turbolinks:load'.split(' ').forEach((eventName)=>{
   document.addEventListener(eventName, (e)=>{
     handleShortcutSubmit();
